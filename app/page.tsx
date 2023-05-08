@@ -1,15 +1,29 @@
-"use client";
+'use client'
 import { GameContext } from "@/contexts/GameContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee, faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
-import { useContext, useState } from "react";
+import { useContext, useState , useEffect} from "react";
 
 export default function Home() {
   const { life, QandA, setLife, score, setScore } = useContext(GameContext);
   let [item, setItem] = useState(0);
   let [userAnswer, setUserAnswer] = useState("");
 
+  useEffect(()=>{
+    const handleWindow = () =>{
+      window.addEventListener('resize', () =>{
+        let menu = document.querySelector("#mobile-menu")! as HTMLElement;
+        if(menu != null){
+          let width = window.innerWidth;
+          if(width > 640){      
+              menu.style.display = "none";          }
+        }});
+      }
+    handleWindow();
+
+      return () => window.removeEventListener("resize", handleWindow);
+  }, [])
   //
   const openMenu = () => {
     let menu = document.querySelector("#mobile-menu")! as HTMLElement;
@@ -52,13 +66,7 @@ export default function Home() {
   }
 
   //esconder menu
-  window.addEventListener('resize', () =>{
-    let menu = document.querySelector("#mobile-menu")! as HTMLElement;
-    if(menu != null){
-      let width = window.innerWidth;
-      if(width > 640){      
-          menu.style.display = "none";          }
-    }});
+ 
 
     const handleUserAnswer = (event:any) =>{
       let answer = document.querySelectorAll<HTMLElement>('.answers');
