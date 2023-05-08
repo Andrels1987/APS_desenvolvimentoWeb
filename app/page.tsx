@@ -238,8 +238,8 @@ export default function Home() {
               <div
                 className="max-w-sm rounded overflow-hidden shadow-lg "
                 style={{
-                  height: "50%",
-                  width: "90%",
+                  height: "60%",
+                  width: "93%",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -294,7 +294,7 @@ export default function Home() {
           style={{
             backgroundColor: "green",
             position: "absolute",
-            top: "80%",
+            top: "88%",
           }}
           onClick={checkAnswer}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
