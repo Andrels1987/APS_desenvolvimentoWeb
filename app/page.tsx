@@ -28,6 +28,11 @@ export default function Home() {
       setLife((life: any) => life - 1);
     }
     setItem(item => item + 1);
+    let answer = document.querySelectorAll<HTMLElement>('.answers');
+      answer.forEach(element => {
+        let styles = getComputedStyle(element, "::after");
+        element.style.setProperty('--largura', '5px')               
+      });
   };
 
   //insere os icones de vida no header - CORAÇÕES
@@ -39,6 +44,12 @@ export default function Home() {
     return content;
   };
 
+  //close menu click
+  const closeMenuClick = () => {
+    let menu = document.querySelector("#mobile-menu")! as HTMLElement;
+    menu.style.display = "none";  
+  }
+
   //esconder menu
   window.addEventListener('resize', () =>{
     let menu = document.querySelector("#mobile-menu")! as HTMLElement;
@@ -47,6 +58,20 @@ export default function Home() {
       if(width > 640){      
           menu.style.display = "none";          }
     }});
+
+    const handleUserAnswer = (event:any) =>{
+      let answer = document.querySelectorAll<HTMLElement>('.answers');
+      answer.forEach(element => {
+        let styles = getComputedStyle(element, "::after");
+        element.style.setProperty('--largura', '5px')               
+      });
+
+      let target = event.target;  
+      let styles = getComputedStyle(target, "::after");
+      target.style.setProperty('--largura', '100%')
+      
+      setUserAnswer(target.innerText);
+    }
   return (
     <>
       <nav className="bg-gray-800 z-10-relative ">
@@ -200,6 +225,7 @@ export default function Home() {
         </div>
       </nav>
       <div
+      onClick={closeMenuClick}
         style={{
           height: "100vh",
           background: "#F9F3BC",
@@ -224,21 +250,20 @@ export default function Home() {
                 }}
               >
                 <div className="px-6 py-4">
-                  <div className="font-bold text-xl mb-2 text-green-500 text-4xl">
+                  <div className="font-bold text-xl mb-2 text-green-500 text-4xl question">
                     {QandA[item].question} ?
                   </div>
                   <div className="font-bold text-xl mb-2 ">
                     {QandA[item].answers.map((a: any) => 
                        (
-                        <p
-                          key={a.id}
-                          className="text-gray-700 text-base text-green-700 py-4"
-                          onClick={() =>
-                            setUserAnswer(a.answer)
-                          }
-                        >
-                          {a.answer}
-                        </p>
+                        <div key={a.id} className="answers" onClick={(ev) =>handleUserAnswer(ev)}>
+                          <p                            
+                            className="text-gray-700 text-base text-green-700 py-4" 
+                            style={{padding : "0"}}                           
+                            >
+                            {a.answer}
+                          </p>
+                          </div>
                       )
                     )}
                   </div>
