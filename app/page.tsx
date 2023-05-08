@@ -6,7 +6,7 @@ import { faCoffee, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useContext, useState } from "react";
 
 export default function Home() {
-  const { life, QandA, setLife } = useContext(GameContext);
+  const { life, QandA, setLife, score, setScore } = useContext(GameContext);
   let [item, setItem] = useState(0);
   let [userAnswer, setUserAnswer] = useState("");
 
@@ -24,6 +24,7 @@ export default function Home() {
     let rightAnswer = QandA[item].rightAnswer;
     if (userAnswer == rightAnswer) {
       console.log("Answer is correct");
+      setScore((score: number) => score + 10);
     } else {
       setLife((life: any) => life - 1);
     }
@@ -224,6 +225,7 @@ export default function Home() {
           </div>
         </div>
       </nav>
+      <div className="score">{score}</div>
       <div
       onClick={closeMenuClick}
         style={{
@@ -234,7 +236,8 @@ export default function Home() {
           alignItems: "center",
         }}
       >
-        {item < QandA.length ? (
+        {life > 0 ? 
+            item < QandA.length ? (
               <div
                 className="max-w-sm rounded overflow-hidden shadow-lg "
                 style={{
@@ -286,6 +289,26 @@ export default function Home() {
             <div className="px-6 py-4">
               <div className="font-bold text-xl mb-2 text-yellow-600">
                 <h1>PEGUTAS FINALIZADAS</h1>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div
+            style={{
+              height: "50%",
+              width: "90%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "#F3DB97",
+              position: "absolute",
+              top: "25%",
+            }}
+            className="max-w-sm rounded overflow-hidden shadow-lg"
+          >
+            <div className="px-6 py-4">
+              <div className="font-bold text-xl mb-2 text-yellow-600">
+                <h1>Sem vidas</h1>
               </div>
             </div>
           </div>

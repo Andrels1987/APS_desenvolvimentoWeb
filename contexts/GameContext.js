@@ -14,13 +14,15 @@ export const GameContext = createContext();
 const GameProvider = ({children}) => {
     const [QandA, setQandA] = useState(QuestionsAndAnswers)
     let [life, setLife] = useState(3)
-    
+    const [score, setScore] = useState(0)
     return (
         <GameContext.Provider value={{
             QandA,
             setQandA,
             life,
-            setLife
+            setLife,
+            score,
+            setScore
         }}>
 
         {children}
