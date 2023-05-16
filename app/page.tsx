@@ -321,14 +321,14 @@ export default function Home() {
             </div>
           </div>
         )}
+
         <button
           style={{
-            backgroundColor: "green",
             position: "absolute",
             top: "88%",
           }}
           onClick={checkAnswer}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+          className={`${QandA.length == item ? "disabled bg-gray-500" : "bg-blue-500 "} text-white font-bold py-2 px-4 rounded-full `}
         >
           Responder
         </button>

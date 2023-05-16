@@ -96,7 +96,11 @@ p{
   font-size: 2em;
   transition: .5s;
 }
-
+.disabled{
+  cursor: not-allowed;
+  pointer-events: none;
+  background-color: darkkhaki;
+}
 @media (max-width: 640px) {
   #mobile-menu{
     display: none;
